@@ -13,6 +13,7 @@
   width: 150px;
   float: left;
   color: #fff;
+  margin-left: 10px;
 }
 
 .YrWeather.vertical .weather-info 
@@ -99,7 +100,7 @@
   float: left;
   clear: both;
 }
-.YrWeather  .weather-links a {
+.YrWeather  .weather-links a.dark-button {
   font-size: 0.6em;
   line-height: 1.286em;
   color: #a29060;
