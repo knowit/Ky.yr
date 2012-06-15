@@ -12,6 +12,11 @@ using System.Xml.Serialization;
 
 namespace Ky.yr
 {
+    /// <summary>
+    /// Connects to the URL specified, downloads the content as a string and caches the content for 15 and 24 hours.
+    /// Consecutive calls to this method will check cache first and if the Url specified exist in the cache it will get content from cache instead of getting it from the URL specified.
+    /// If the target URL is unreachable, it will try to provide data from the 24 hour cache to serve data.
+    /// </summary>
     public class WeatherHandler
     {
         private static WebClient _client;
@@ -49,16 +54,23 @@ namespace Ky.yr
             }
             catch (Exception e)
             {
-                // if the web client fails to download content from finn.no try looking in the long time cache store to serve content to the user during the outage
+                // if the web client fails to download content from target URL, try looking in the long time cache store to serve content to the user during the outage
                 result = _cache.Get("lt:" + url) as string ?? string.Empty;
             }
             return result;
         }
+        /// <summary>
+        /// Instansiate a cache object for the given URL. Data in the cache will be stored for 15 minutes and 24 hours.
+        /// As long as data exist for the given URL in the 15 minute cache, it will not be updated from target.
+        /// If target is unavailable, cache will try to find data from the 24 hour cache store instead to serve content.
+        /// </summary>
+        /// <param name="url">URL to yr.no weather xml file. E.g: http://www.yr.no/place/Norway/Hordaland/Bergen/Bergen/forecast.xml </param>
+        /// <returns>DynamicXml object or null if data could not be retrieved</returns>
         public static DynamicXml GetForeceast(string url)
         {
             WeatherHandler _me = new WeatherHandler();
             string result = _me.GetData(url);
-            return new DynamicXml(result);
+            return (!string.IsNullOrEmpty(result)) ? new DynamicXml(result) : null;
         }
         
     }

@@ -81,6 +81,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy $(SolutionDir)bin\Ky.yr.dll "$(SolutionDir)\..\..\..\Visual Studio 2010\Projects\Umbraco 4.7.2\bin\Ky.yr.dll"
+copy $(SolutionDir)css\* "$(SolutionDir)\..\..\..\Visual Studio 2010\Projects\Umbraco 4.7.2\css\"
+copy $(SolutionDir)macroScripts\* "$(SolutionDir)\..\..\..\Visual Studio 2010\Projects\Umbraco 4.7.2\macroScripts\"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
