@@ -1,0 +1,62 @@
+﻿@*
+    © Knowit Reaktor Kyber 2012
+    This script lists future event times for the current node, if any ...
+*@
+@using umbraco.MacroEngines
+@using Kyber.YrWeather;
+@inherits umbraco.MacroEngines.DynamicNodeContext
+@{
+    // Get the Yr Url from umbraco
+    var url = @Model.yrUrl;
+    
+    // If the user has not entered the name of the xml file, add default English xml file
+    if (!url.EndsWith(".xml")){
+        // Check that url ends with proper slash
+        url = url.EndsWith("/") ? url : url + "/";
+        
+        // Change to xml file format
+        url = url + "forecast.xml";
+    }
+    
+    // The weather data is cached for 15 minutes, and 24 hours, using System.Runtime.Caching.MemoryCache
+    var forecast = WeatherHandler.GetForeceast(url) as dynamic;
+    if (forecast != null)
+    {
+     @:<div class="YrWeather">
+        @:<div class="weather-info">
+        @:  <p class="header">@Dictionary["Forecast"] <span>@forecast.location.name.Value</span></p>    
+    
+        var d = DateTime.MinValue;
+        if (DateTime.TryParse(forecast.meta.lastupdate.Value, out d))
+        {
+            <p class="last-updated">@Dictionary["Last updated"] @d.ToString("HH:mm")
+                <a class="weather-footer" href="@forecast.credit.link.url.Value">@Dictionary["yr.no credits"]</a>
+            </p>
+        }
+        @:</div>
+        @:<ul class="weather-forecast">
+        var numberOfDaysToShow = 5;
+        var numberofDaysShown = 0;
+        foreach (var x in forecast.forecast.tabular.time)
+        {
+
+            if (x.period.Value == "2" && numberofDaysShown < numberOfDaysToShow)
+            {
+                var iconurl = String.Format("http://symbol.yr.no/grafikk/sym/b100/{0}.png", x.symbol.var.Value);
+                var forecastdate = DateTime.Parse(@x.from.Value);
+                @:<li>
+                @:  <div class="info">
+                @:      <img src="@iconurl" alt="@x.symbol.name.Value" width="50" title="@x.symbol.name.Value"/>
+                @:      <p class="day">@forecastdate.ToString("dddd")</p>
+                @:      <p class="date">@forecastdate.ToString("dd. MMMM")</p>
+                @:  </div>
+                @:  <div class="temperature">@x.temperature.value.Value°</div>
+                @:</li>
+                numberofDaysShown++;
+            }
+        }
+        @:</ul>
+        @:<div class="weather-links"><a class="dark-button" href="@forecast.credit.link.url.Value">@forecast.credit.link.text.Value</a></div>
+        @:</div>
+    }
+}

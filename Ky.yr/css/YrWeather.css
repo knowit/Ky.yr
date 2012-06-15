@@ -1,0 +1,81 @@
+﻿.YrWeather 
+{
+    height: 150px;
+  background: #333;
+  margin: 40px 0;
+  border-top: 1px solid #abaaa6;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+}
+.YrWeather  .weather-info {
+  width: 150px;
+  float: left;
+  color: #fff;
+  height: 150px;
+}
+.YrWeather .header {
+  font-size: 1.125em;
+  line-height: 1.5em;
+  color: #a29060;
+}
+.YrWeather span {
+  color: #fff;
+}
+.YrWeather .last-updated {
+  font-size: 0.688em;
+  line-height: 1.636em;
+  color: #999999;
+  margin-top: 3.488em;
+  position: relative;
+}
+.YrWeather .weather-footer {
+  position: absolute;
+  left: 0px;
+  top: -1.2em;
+}
+.YrWeather  .weather-forecast {
+  margin: 12px 0px 0px 0px;
+  padding: 0px;
+  list-style: none;
+  float: left;
+}
+.YrWeather  li {
+  display: inline-block;
+  color: white;
+  margin: 0px 12px;
+}
+.YrWeather li div {
+  float: left;
+}
+.YrWeather p {
+  margin: 0px  0px 0px 0px;
+}
+.YrWeather p.day {
+  font-size: 0.813em;
+  line-height: 1.385em;
+  text-transform: capitalize;
+}
+.YrWeather p.date {
+  font-size: 0.688em;
+  line-height: 1.636em;
+  color: #999999;
+}
+.YrWeather div.temperature {
+  font-size: 1.625em;
+  line-height: 1.385em;
+  color: #a29060;
+  margin-top: 0.563em;
+  margin-left: 5px;
+}
+.YrWeather  .weather-links {
+  float: left;
+  clear: both;
+  margin: 0 15px;
+  margin-top: 30px;
+  color: #a29060;
+}
+.YrWeather  .weather-links a {
+  font-size: 0.875em;
+  line-height: 1.286em;
+}
