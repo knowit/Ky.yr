@@ -1,18 +1,25 @@
 ﻿.YrWeather 
 {
-    height: 150px;
   background: #333;
   margin: 40px 0;
   border-top: 1px solid #abaaa6;
   -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 5px;
+  float: left;
+  width: 100%;
 }
 .YrWeather  .weather-info {
   width: 150px;
   float: left;
   color: #fff;
-  height: 150px;
+}
+
+.YrWeather.vertical .weather-info 
+{
+    float: left;
+    clear: both;
+    
 }
 .YrWeather .header {
   font-size: 1.125em;
@@ -40,13 +47,27 @@
   list-style: none;
   float: left;
 }
-.YrWeather  li {
+.YrWeather.vertical .weather-forecast 
+{
+    clear: both;
+    float: left;
+}
+.YrWeather li {
   display: inline-block;
   color: white;
   margin: 0px 12px;
+
+}
+
+.YrWeather.vertical li 
+{
+  clear: both;
+  float: left;
+  margin-bottom: 10px;
 }
 .YrWeather li div {
   float: left;
+  
 }
 .YrWeather p {
   margin: 0px  0px 0px 0px;
@@ -71,11 +92,15 @@
 .YrWeather  .weather-links {
   float: left;
   clear: both;
-  margin: 0 15px;
-  margin-top: 30px;
-  color: #a29060;
+  margin: 10px;
+}
+
+.YrWeather.vertical  .weather-links {
+  float: left;
+  clear: both;
 }
 .YrWeather  .weather-links a {
-  font-size: 0.875em;
+  font-size: 0.6em;
   line-height: 1.286em;
+  color: #a29060;
 }

@@ -7,7 +7,9 @@
 @inherits umbraco.MacroEngines.DynamicNodeContext
 @{
     // Get the Yr Url from umbraco
-    var url = @Model.yrUrl;
+    var url = Parameter.yrUrl;
+    var test = Parameter.showVertical;
+    var showVerticalClass = Parameter.showVertical == "1" ? "vertical" : "";
     
     // If the user has not entered the name of the xml file, add default English xml file
     if (!url.EndsWith(".xml")){
@@ -22,17 +24,9 @@
     var forecast = WeatherHandler.GetForeceast(url) as dynamic;
     if (forecast != null)
     {
-     @:<div class="YrWeather">
+     @:<div class="YrWeather @showVerticalClass">
         @:<div class="weather-info">
-        @:  <p class="header">@Dictionary["Forecast"] <span>@forecast.location.name.Value</span></p>    
-    
-        var d = DateTime.MinValue;
-        if (DateTime.TryParse(forecast.meta.lastupdate.Value, out d))
-        {
-            <p class="last-updated">@Dictionary["Last updated"] @d.ToString("HH:mm")
-                <a class="weather-footer" href="@forecast.credit.link.url.Value">@Dictionary["yr.no credits"]</a>
-            </p>
-        }
+        @:<p class="header"><span>Weather forecast for @forecast.location.name.Value</span></p>    
         @:</div>
         @:<ul class="weather-forecast">
         var numberOfDaysToShow = 5;
